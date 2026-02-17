@@ -32,7 +32,7 @@ if ! "${COMPOSE_CMD[@]}" ps --format json | grep -q '"Health":"healthy"'; then
   exit 1
 fi
 
-export TEST_DATABASE_URL='postgresql://postgres:postgres@localhost:5432/findaspring_test'
+export TEST_DATABASE_URL='postgresql://postgres:postgres@localhost:55432/findaspring_test'
 export AUTH_SECRET='local-integration-secret'
 export BOOTSTRAP_ADMIN_KEY='local-bootstrap-key'
 
