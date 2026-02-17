@@ -1,5 +1,5 @@
 # Find A Spring
-[![CI](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml)
+[![CI](https://github.com/mmdevon/findaspring/actions/workflows/ci.yml/badge.svg)](https://github.com/mmdevon/findaspring/actions/workflows/ci.yml)
 
 Codebase scaffold for MVP + community roadmap.
 
@@ -140,7 +140,7 @@ psql "$DATABASE_URL" -f db/schema.sql
 
 ### CI troubleshooting
 - Badge URL placeholder:
-  - Replace `<OWNER>/<REPO>` in the badge/link URL above with your GitHub repository path.
+  - If you fork/rename the repo, update the badge/link URL above.
 - Integration tests are skipped locally:
   - Ensure `TEST_DATABASE_URL` is set before running `npm --workspace @findaspring/api run test:integration`.
 - PostGIS errors such as `type "geography" does not exist`:
