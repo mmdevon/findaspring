@@ -137,7 +137,7 @@ psql "$DATABASE_URL" -f db/schema.sql
   - `Mobile Tests`: runs `npm --workspace @findaspring/mobile run test`
   - `Unit Tests`: runs `npm --workspace @findaspring/api run test:unit`
   - `API Smoke Test`: runs `npm --workspace @findaspring/api run test:smoke`
-  - `Integration Tests (PostGIS)`: starts `postgis/postgis:16-3.4`, injects `TEST_DATABASE_URL`, and runs `npm --workspace @findaspring/api run test:integration`
+  - `Integration Tests (PostGIS)`: starts `postgis/postgis:16-3.4`, injects `TEST_DATABASE_URL`, and runs all API integration suites via `npm --workspace @findaspring/api run test:integration`
 - Path filters:
   - API/DB/workflow changes trigger API unit + integration jobs.
   - Mobile changes trigger mobile tests and typecheck.

@@ -192,5 +192,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run meetups integration test
+      - name: Run API integration suites
         run: npm --workspace @findaspring/api run test:integration

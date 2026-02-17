@@ -1,49 +1,15 @@
-import { readFile } from 'node:fs/promises';
-import { createServer } from 'node:http';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import { setupIntegrationApp } from './helpers/integration.js';
 
 const testDbUrl = process.env.TEST_DATABASE_URL || '';
-
-const resetTables = async (pool) => {
-  await pool.query('TRUNCATE TABLE user_reports, user_blocks, meetup_messages, meetup_members, meetups, favorites, spring_reports, spring_submissions, springs, refresh_tokens, users RESTART IDENTITY CASCADE');
-};
 
 test(
   'meetup creation, rsvp, chat, user report, and moderation resolve flow',
   { skip: !testDbUrl },
   async () => {
-    const { Pool } = await import('pg');
-
-    process.env.DATABASE_URL = testDbUrl;
-    process.env.AUTH_SECRET = process.env.AUTH_SECRET || 'test-secret';
-    process.env.BOOTSTRAP_ADMIN_KEY = process.env.BOOTSTRAP_ADMIN_KEY || 'bootstrap-test-key';
-
-    const pool = new Pool({ connectionString: testDbUrl });
-
-    const schemaPath = new URL('../../../db/schema.sql', import.meta.url);
-    const schemaSql = await readFile(schemaPath, 'utf8');
-
-    await pool.query(schemaSql);
-    await resetTables(pool);
-
-    const { app } = await import('../src/app.js');
-
-    const server = createServer((req, res) => {
-      app(req, res);
-    });
-
-    await new Promise((resolve) => server.listen(0, resolve));
-    const address = server.address();
-    assert.ok(address && typeof address === 'object');
-    const base = `http://127.0.0.1:${address.port}`;
-
-    const request = async (path, options) => {
-      const response = await fetch(`${base}${path}`, options);
-      const payload = await response.json().catch(() => ({}));
-      return { status: response.status, payload };
-    };
+    const { pool, request, close } = await setupIntegrationApp(testDbUrl);
 
     const springId = crypto.randomUUID();
     await pool.query(
@@ -159,7 +125,6 @@ test(
     assert.equal(resolveUserReport.status, 200);
     assert.equal(resolveUserReport.payload.data.status, 'resolved');
 
-    await new Promise((resolve) => server.close(resolve));
-    await pool.end();
+    await close();
   }
 );
