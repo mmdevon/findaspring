@@ -1,4 +1,5 @@
 # Find A Spring
+[![CI](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml)
 
 Codebase scaffold for MVP + community roadmap.
 
@@ -123,6 +124,29 @@ Run schema in Postgres (with PostGIS enabled):
 ```bash
 psql "$DATABASE_URL" -f db/schema.sql
 ```
+
+## CI
+- Workflow: `.github/workflows/ci.yml`
+- Triggers: pushes to `main` and all pull requests
+- Jobs run in parallel (when relevant paths change):
+  - `Lint`: runs `npm run lint`
+  - `Typecheck`: runs `npm run typecheck`
+  - `Unit Tests`: runs `npm --workspace @findaspring/api run test:unit`
+  - `Integration Tests (PostGIS)`: starts `postgis/postgis:16-3.4`, injects `TEST_DATABASE_URL`, and runs `npm --workspace @findaspring/api run test:integration`
+- Path filters:
+  - API/DB/workflow changes trigger API unit + integration jobs.
+  - Mobile/design-tokens/TS config changes trigger typecheck.
+  - Code/workflow changes trigger lint.
+
+### CI troubleshooting
+- Badge URL placeholder:
+  - Replace `<OWNER>/<REPO>` in the badge/link URL above with your GitHub repository path.
+- Integration tests are skipped locally:
+  - Ensure `TEST_DATABASE_URL` is set before running `npm --workspace @findaspring/api run test:integration`.
+- PostGIS errors such as `type "geography" does not exist`:
+  - Confirm `CREATE EXTENSION IF NOT EXISTS postgis;` can run and that the database user has extension privileges.
+- DB connection failures in CI:
+  - Confirm `TEST_DATABASE_URL` points to `localhost:5432` with the same DB/user/password configured in the workflow service.
 
 ## Notes
 - Mobile theme is wired to shared tokens from `packages/design-tokens`.

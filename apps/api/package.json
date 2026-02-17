@@ -10,7 +10,9 @@
     "lint": "echo 'No lint step yet'",
     "typecheck": "echo 'No typecheck step yet'",
     "seed:moderator": "node scripts/seed_moderator.js",
-    "test": "node --test"
+    "test": "node --test",
+    "test:unit": "node --test \"src/**/*.test.js\"",
+    "test:integration": "node --test test/meetups.integration.test.js"
   },
   "dependencies": {
     "pg": "^8.13.1"
