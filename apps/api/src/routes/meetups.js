@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import { db } from '../db.js';
 import { requireRole, requireUser } from '../lib/auth.js';
 import { json, parseBody } from '../lib/http.js';
+import { publishMeetupMessage } from '../realtime.js';
 
 const asNumber = (value, fallback) => {
   const parsed = Number(value);
@@ -293,7 +294,9 @@ export const handleCreateMeetupMessage = async (req, res, meetupId) => {
     [messageId, meetupId, auth.user.id, messageBody]
   );
 
-  return json(res, 201, { data: inserted.rows[0] });
+  const message = inserted.rows[0];
+  publishMeetupMessage(meetupId, message);
+  return json(res, 201, { data: message });
 };
 
 export const handleRemoveMeetupMember = async (req, res, meetupId) => {

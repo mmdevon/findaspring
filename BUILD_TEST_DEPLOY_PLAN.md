@@ -5,6 +5,17 @@
 2. CI baseline in `.github/workflows/ci.yml` remains active.
 3. `main` stays branch-protected and PR-based.
 
+## Progress Tracker
+- [x] CI pipeline with PostGIS-backed integration testing is active.
+- [x] Branch protection and PR-based workflow are active.
+- [x] Local PostGIS integration script runs and passes non-skip integration test.
+- [x] Mobile navigation refactor (tab + stack behavior) implemented.
+- [x] Mobile moderation user-reports screen implemented.
+- [x] Realtime meetup chat over WebSocket implemented (API + mobile client).
+- [ ] Mobile test framework and first UI regression suite.
+- [ ] Staging environment and deployment pipeline.
+- [ ] Production hardening and release operations.
+
 ## Phase 1: Product Hardening (Weeks 1-2)
 1. Finalize API contracts for auth, springs, meetups, moderation.
 2. Add mobile navigation architecture (tabs + stacks) and route guards.
@@ -41,8 +52,8 @@
 5. Rollback path tested for API and DB migration.
 
 ## Immediate Next 7 Days
-1. Implement navigation refactor and moderation UI.
-2. Add websocket chat backend + mobile client switch.
-3. Add mobile test framework and first E2E smoke flow.
-4. Stand up staging API + PostGIS and run first staging deploy.
-5. Document release/rollback runbook in repo docs.
+1. [x] Implement navigation refactor and moderation UI.
+2. [x] Add websocket chat backend + mobile client switch.
+3. [ ] Add mobile test framework and first E2E smoke flow.
+4. [ ] Stand up staging API + PostGIS and run first staging deploy.
+5. [ ] Document release/rollback runbook in repo docs.

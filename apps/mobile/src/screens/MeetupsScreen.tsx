@@ -12,6 +12,7 @@ import {
   Meetup,
   MeetupDetail,
   MeetupMessage,
+  openMeetupMessageSocket,
   reportUser,
   rsvpMeetup,
   sendMeetupMessage
@@ -81,19 +82,42 @@ export function MeetupsScreen() {
   useEffect(() => {
     if (mode !== 'detail' || !selectedMeetup) return undefined;
 
-    const interval = setInterval(async () => {
+    let socket: WebSocket | null = null;
+    try {
+      socket = openMeetupMessageSocket(selectedMeetup.id);
+    } catch {
+      socket = null;
+    }
+
+    if (!socket) return undefined;
+
+    socket.onmessage = (event) => {
       try {
-        const chat = await listMeetupMessages(selectedMeetup.id);
+        const payload = JSON.parse(String(event.data)) as {
+          type?: string;
+          data?: MeetupMessage;
+        };
+
+        if (payload.type !== 'meetup_message' || !payload.data) return;
+        const incoming = payload.data;
+
         setMessages((prev) => {
-          const existingTemp = prev.filter((msg) => msg.id.startsWith('temp-'));
-          return [...chat.data.slice().reverse(), ...existingTemp];
+          const withoutTempMatch = prev.filter((msg) => {
+            if (!msg.id.startsWith('temp-')) return true;
+            return !(msg.user_id === incoming.user_id && msg.body === incoming.body);
+          });
+
+          if (withoutTempMatch.some((msg) => msg.id === incoming.id)) return withoutTempMatch;
+          return [...withoutTempMatch, incoming];
         });
       } catch {
-        // Keep current messages on transient polling failures.
+        // Ignore malformed socket payloads.
       }
-    }, 8000);
+    };
 
-    return () => clearInterval(interval);
+    return () => {
+      socket?.close();
+    };
   }, [mode, selectedMeetup]);
 
   const summaryText = useMemo(() => {

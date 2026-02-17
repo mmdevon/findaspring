@@ -317,6 +317,14 @@ export const reportUser = async (targetUserId: string, payload: { reason: string
   await request(`/v1/users/${targetUserId}/report`, { method: 'POST', body: JSON.stringify(payload) }, true);
 };
 
+export const openMeetupMessageSocket = (meetupId: string) => {
+  if (!accessToken) throw new Error('Sign in to open realtime chat.');
+  const origin = new URL(API_BASE_URL);
+  const protocol = origin.protocol === 'https:' ? 'wss:' : 'ws:';
+  const url = `${protocol}//${origin.host}/v1/meetups/${meetupId}/ws?access_token=${encodeURIComponent(accessToken)}`;
+  return new WebSocket(url);
+};
+
 export const listModerationUserReports = async (status: 'open' | 'triaged' | 'resolved' | 'dismissed' = 'open') => {
   if (!accessToken) throw new Error('Sign in as moderator/admin.');
   const payload = await request(`/v1/moderation/user-reports?status=${encodeURIComponent(status)}`, undefined, true);
