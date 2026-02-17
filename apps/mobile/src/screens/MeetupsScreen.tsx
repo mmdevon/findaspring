@@ -414,8 +414,8 @@ const styles = StyleSheet.create({
   },
   smallBtn: {
     borderRadius: theme.radius['12'],
-    paddingHorizontal: theme.space['10'],
-    paddingVertical: theme.space['6'],
+    paddingHorizontal: theme.space['12'],
+    paddingVertical: theme.space['8'],
     borderWidth: 1,
     borderColor: theme.color.accent.primary,
     backgroundColor: '#FFFFFF'

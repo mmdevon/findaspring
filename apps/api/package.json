@@ -11,7 +11,7 @@
     "typecheck": "echo 'No typecheck step yet'",
     "seed:moderator": "node scripts/seed_moderator.js",
     "test": "node --test",
-    "test:unit": "node --test \"src/**/*.test.js\"",
+    "test:unit": "node --test src/lib/passwords.test.js src/lib/tokens.test.js",
     "test:integration": "node --test test/meetups.integration.test.js"
   },
   "dependencies": {

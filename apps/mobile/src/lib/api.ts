@@ -1,5 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+declare const process: {
+  env: Record<string, string | undefined>;
+};
+
 export type User = {
   id: string;
   email: string;
