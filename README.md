@@ -158,13 +158,13 @@ Run the meetup integration test locally against PostGIS with one command:
 
 Requirements:
 - Docker Desktop installed and running.
-- Port `5432` available on your machine.
+- Port `55432` available on your machine.
 
 Manual alternative:
 
 ```bash
 docker compose -f db/docker-compose.postgis.yml up -d
-export TEST_DATABASE_URL='postgresql://postgres:postgres@localhost:5432/findaspring_test'
+export TEST_DATABASE_URL='postgresql://postgres:postgres@localhost:55432/findaspring_test'
 export AUTH_SECRET='local-integration-secret'
 export BOOTSTRAP_ADMIN_KEY='local-bootstrap-key'
 npm --workspace @findaspring/api run test:integration
