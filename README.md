@@ -193,6 +193,14 @@ Enable branch protection for `main` in GitHub:
 - Required secrets and host setup:
   - see `/docs/DEPLOYMENT.md`
 
+## Mobile Release
+- Mobile release workflow: `.github/workflows/mobile-release.yml`
+- EAS build profiles: `apps/mobile/eas.json` (`preview`, `staging`, `production`)
+- Required GitHub secret:
+  - `EXPO_TOKEN`
+- Full guide:
+  - `/docs/MOBILE_RELEASE.md`
+
 ## Release Operations
 - Release and rollback runbook:
   - `/docs/RELEASE_RUNBOOK.md`

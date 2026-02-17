@@ -21,6 +21,7 @@
 - [x] Uptime monitor workflow added.
 - [x] Release checklist and changelog process documented.
 - [x] Local DB backup/restore verification drill automated.
+- [x] Mobile release pipeline scaffolded with EAS profiles and workflow.
 - [ ] Staging infrastructure secrets/host provisioning completed.
 - [ ] First successful staging deployment executed.
 - [ ] Backup/restore verification executed on staging/prod data.
@@ -69,3 +70,4 @@
 5. [x] Document release/rollback runbook in repo docs.
 6. [x] Add structured API logs + uptime monitor workflow.
 7. [x] Add release checklist + changelog baseline.
+8. [x] Add mobile release workflow with EAS profiles.
