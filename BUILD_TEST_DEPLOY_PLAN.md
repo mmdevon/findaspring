@@ -23,6 +23,7 @@
 - [x] Local DB backup/restore verification drill automated.
 - [x] Mobile release pipeline scaffolded with EAS profiles and workflow.
 - [x] API integration suites expanded for auth/springs/moderation and failure paths.
+- [x] Mobile component tests expanded for Discover and Meetups core flows.
 - [ ] Staging infrastructure secrets/host provisioning completed.
 - [ ] First successful staging deployment executed.
 - [ ] Backup/restore verification executed on staging/prod data.
@@ -73,3 +74,4 @@
 7. [x] Add release checklist + changelog baseline.
 8. [x] Add mobile release workflow with EAS profiles.
 9. [x] Expand API integration coverage beyond meetups flow.
+10. [x] Add mobile screen smoke tests for Discover + Meetups.
