@@ -11,6 +11,7 @@
     "typecheck": "find src test scripts -name '*.js' -exec node --check {} +",
     "seed:moderator": "node scripts/seed_moderator.js",
     "db:migrate": "node scripts/migrate.js",
+    "test:load": "node scripts/load_test.js",
     "test": "node --test",
     "test:unit": "node --test src/lib/passwords.test.js src/lib/tokens.test.js",
     "test:integration": "node --test --test-concurrency=1 test/*.integration.test.js",

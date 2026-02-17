@@ -225,6 +225,21 @@ Run:
 ./scripts/verify_backup_restore.sh
 ```
 
+## API Load Test (Baseline)
+Run a lightweight load check across `/health`, `/v1/springs`, and `/v1/meetups`:
+
+```bash
+npm --workspace @findaspring/api run test:load
+```
+
+Optional tuning:
+
+```bash
+export LOAD_TEST_TOTAL=500
+export LOAD_TEST_CONCURRENCY=25
+export LOAD_TEST_BASE_URL='https://staging-api.example.com'
+```
+
 ## Notes
 - Mobile theme is wired to shared tokens from `packages/design-tokens`.
 - Discover screen renders `react-native-maps` pins on iOS/Android with a fallback panel when unavailable.

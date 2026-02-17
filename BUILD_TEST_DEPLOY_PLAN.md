@@ -24,6 +24,7 @@
 - [x] Mobile release pipeline scaffolded with EAS profiles and workflow.
 - [x] API integration suites expanded for auth/springs/moderation and failure paths.
 - [x] Mobile component tests expanded for Discover and Meetups core flows.
+- [x] Baseline API load-test harness added for key endpoints.
 - [ ] Staging infrastructure secrets/host provisioning completed.
 - [ ] First successful staging deployment executed.
 - [ ] Backup/restore verification executed on staging/prod data.
@@ -75,3 +76,4 @@
 8. [x] Add mobile release workflow with EAS profiles.
 9. [x] Expand API integration coverage beyond meetups flow.
 10. [x] Add mobile screen smoke tests for Discover + Meetups.
+11. [x] Add baseline API load-test script for key endpoints.
