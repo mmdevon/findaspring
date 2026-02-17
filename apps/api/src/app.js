@@ -37,7 +37,7 @@ import {
   handleSignup
 } from './routes/auth.js';
 
-export const app = async (req, res) => {
+export const app = async (req, res, ctx = {}) => {
   try {
     const url = parseUrl(req);
 
@@ -180,7 +180,8 @@ export const app = async (req, res) => {
   } catch (error) {
     return json(res, 500, {
       error: 'Internal server error',
-      detail: error instanceof Error ? error.message : 'Unknown error'
+      detail: error instanceof Error ? error.message : 'Unknown error',
+      request_id: ctx.requestId || null
     });
   }
 };

@@ -17,9 +17,13 @@
 - [x] Migration automation wired into deploy workflow.
 - [x] CI/CD deploy workflow for staging + production added.
 - [x] Release and rollback runbook documented.
+- [x] Structured API logging and request tracing added.
+- [x] Uptime monitor workflow added.
+- [x] Release checklist and changelog process documented.
 - [ ] Staging infrastructure secrets/host provisioning completed.
 - [ ] First successful staging deployment executed.
-- [ ] Production hardening and release operations.
+- [ ] Backup/restore verification executed on staging/prod data.
+- [ ] Production hardening and release operations completed end-to-end.
 
 ## Phase 1: Product Hardening (Weeks 1-2)
 1. Finalize API contracts for auth, springs, meetups, moderation.
@@ -62,3 +66,5 @@
 3. [x] Add mobile test framework and first smoke flow.
 4. [ ] Stand up staging API + PostGIS and run first staging deploy.
 5. [x] Document release/rollback runbook in repo docs.
+6. [x] Add structured API logs + uptime monitor workflow.
+7. [x] Add release checklist + changelog baseline.

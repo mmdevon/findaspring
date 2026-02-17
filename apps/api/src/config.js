@@ -6,6 +6,8 @@ const asNumber = (value, fallback) => {
 export const config = {
   port: asNumber(process.env.PORT, 4000),
   nodeEnv: process.env.NODE_ENV || 'development',
+  appVersion: process.env.APP_VERSION || process.env.GITHUB_SHA || 'dev',
+  logLevel: process.env.LOG_LEVEL || 'info',
   databaseUrl: process.env.DATABASE_URL || '',
   authSecret: process.env.AUTH_SECRET || 'dev-only-change-me',
   bootstrapAdminKey: process.env.BOOTSTRAP_ADMIN_KEY || '',

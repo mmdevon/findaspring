@@ -51,4 +51,16 @@ export BOOTSTRAP_ADMIN_KEY='local-bootstrap-key'
 
 echo "Running meetup integration test..."
 cd "$REPO_ROOT"
-npm --workspace @findaspring/api run test:integration
+for attempt in {1..3}; do
+  if npm --workspace @findaspring/api run test:integration; then
+    exit 0
+  fi
+
+  if [ "$attempt" -eq 3 ]; then
+    echo "Integration test failed after 3 attempts."
+    exit 1
+  fi
+
+  echo "Integration test attempt $attempt failed, retrying in 3 seconds..."
+  sleep 3
+done

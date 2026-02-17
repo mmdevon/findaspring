@@ -1,0 +1,39 @@
+name: Uptime Monitor
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-staging:
+    name: Check Staging Health
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify staging health endpoint secret
+        run: |
+          if [ -z "${STAGING_HEALTHCHECK_URL}" ]; then
+            echo "STAGING_HEALTHCHECK_URL is not configured."
+            exit 1
+          fi
+        env:
+          STAGING_HEALTHCHECK_URL: ${{ secrets.STAGING_HEALTHCHECK_URL }}
+
+      - name: Check staging /health
+        run: curl --fail --show-error --silent "$STAGING_HEALTHCHECK_URL"
+        env:
+          STAGING_HEALTHCHECK_URL: ${{ secrets.STAGING_HEALTHCHECK_URL }}
+
+  check-production:
+    name: Check Production Health
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip when production URL is not configured
+        if: ${{ secrets.PROD_HEALTHCHECK_URL == '' }}
+        run: echo "PROD_HEALTHCHECK_URL not configured. Skipping production health check."
+
+      - name: Check production /health
+        if: ${{ secrets.PROD_HEALTHCHECK_URL != '' }}
+        run: curl --fail --show-error --silent "$PROD_HEALTHCHECK_URL"
+        env:
+          PROD_HEALTHCHECK_URL: ${{ secrets.PROD_HEALTHCHECK_URL }}

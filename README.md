@@ -31,6 +31,8 @@ Set these before starting API:
 export PORT=4000
 export DATABASE_URL='postgres://user:pass@localhost:5432/findaspring'
 export AUTH_SECRET='replace-with-strong-secret'
+export LOG_LEVEL='info'
+export APP_VERSION='dev'
 ```
 
 Optional:
@@ -194,6 +196,17 @@ Enable branch protection for `main` in GitHub:
 ## Release Operations
 - Release and rollback runbook:
   - `/docs/RELEASE_RUNBOOK.md`
+- Observability and uptime monitoring:
+  - `/docs/OBSERVABILITY.md`
+- Release checklist:
+  - `/docs/RELEASE_CHECKLIST.md`
+- Changelog baseline:
+  - `/CHANGELOG.md`
+
+## Uptime Monitoring Secrets
+Configure in GitHub Actions:
+- `STAGING_HEALTHCHECK_URL` (required by `.github/workflows/uptime.yml`)
+- `PROD_HEALTHCHECK_URL` (optional)
 
 ## Notes
 - Mobile theme is wired to shared tokens from `packages/design-tokens`.
