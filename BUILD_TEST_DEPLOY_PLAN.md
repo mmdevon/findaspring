@@ -12,7 +12,7 @@
 - [x] Mobile navigation refactor (tab + stack behavior) implemented.
 - [x] Mobile moderation user-reports screen implemented.
 - [x] Realtime meetup chat over WebSocket implemented (API + mobile client).
-- [ ] Mobile test framework and first UI regression suite.
+- [x] Mobile test framework and first smoke flow implemented.
 - [ ] Staging environment and deployment pipeline.
 - [ ] Production hardening and release operations.
 
@@ -54,6 +54,6 @@
 ## Immediate Next 7 Days
 1. [x] Implement navigation refactor and moderation UI.
 2. [x] Add websocket chat backend + mobile client switch.
-3. [ ] Add mobile test framework and first E2E smoke flow.
+3. [x] Add mobile test framework and first smoke flow.
 4. [ ] Stand up staging API + PostGIS and run first staging deploy.
 5. [ ] Document release/rollback runbook in repo docs.

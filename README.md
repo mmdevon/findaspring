@@ -131,12 +131,13 @@ psql "$DATABASE_URL" -f db/schema.sql
 - Jobs run in parallel (when relevant paths change):
   - `Lint`: runs `npm run lint`
   - `Typecheck`: runs `npm run typecheck`
+  - `Mobile Tests`: runs `npm --workspace @findaspring/mobile run test`
   - `Unit Tests`: runs `npm --workspace @findaspring/api run test:unit`
   - `API Smoke Test`: runs `npm --workspace @findaspring/api run test:smoke`
   - `Integration Tests (PostGIS)`: starts `postgis/postgis:16-3.4`, injects `TEST_DATABASE_URL`, and runs `npm --workspace @findaspring/api run test:integration`
 - Path filters:
   - API/DB/workflow changes trigger API unit + integration jobs.
-  - Mobile/design-tokens/TS config changes trigger typecheck.
+  - Mobile changes trigger mobile tests and typecheck.
   - Code/workflow changes trigger lint.
 
 ### CI troubleshooting
@@ -175,7 +176,7 @@ docker compose -f db/docker-compose.postgis.yml down -v
 Enable branch protection for `main` in GitHub:
 - Settings -> Branches -> Add rule.
 - Require status checks to pass before merging.
-- Select checks from this workflow: `Lint`, `Typecheck`, `Unit Tests`, `API Smoke Test`, `Integration Tests (PostGIS)`.
+- Select checks from this workflow: `Lint`, `Typecheck`, `Mobile Tests`, `Unit Tests`, `API Smoke Test`, `Integration Tests (PostGIS)`.
 
 ## Notes
 - Mobile theme is wired to shared tokens from `packages/design-tokens`.
