@@ -202,11 +202,20 @@ Enable branch protection for `main` in GitHub:
   - `/docs/RELEASE_CHECKLIST.md`
 - Changelog baseline:
   - `/CHANGELOG.md`
+- DB backup/restore verification:
+  - `/docs/DB_BACKUP_RESTORE.md`
 
 ## Uptime Monitoring Secrets
 Configure in GitHub Actions:
 - `STAGING_HEALTHCHECK_URL` (required by `.github/workflows/uptime.yml`)
 - `PROD_HEALTHCHECK_URL` (optional)
+
+## Local Backup/Restore Drill
+Run:
+
+```bash
+./scripts/verify_backup_restore.sh
+```
 
 ## Notes
 - Mobile theme is wired to shared tokens from `packages/design-tokens`.

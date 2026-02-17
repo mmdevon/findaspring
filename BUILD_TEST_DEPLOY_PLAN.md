@@ -20,6 +20,7 @@
 - [x] Structured API logging and request tracing added.
 - [x] Uptime monitor workflow added.
 - [x] Release checklist and changelog process documented.
+- [x] Local DB backup/restore verification drill automated.
 - [ ] Staging infrastructure secrets/host provisioning completed.
 - [ ] First successful staging deployment executed.
 - [ ] Backup/restore verification executed on staging/prod data.
