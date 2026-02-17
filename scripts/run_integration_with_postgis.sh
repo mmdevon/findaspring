@@ -32,6 +32,19 @@ if ! "${COMPOSE_CMD[@]}" ps --format json | grep -q '"Health":"healthy"'; then
   exit 1
 fi
 
+echo "Verifying PostGIS accepts SQL connections..."
+for _ in {1..30}; do
+  if docker exec findaspring-postgis-test psql -U postgres -d findaspring_test -c 'SELECT 1' >/dev/null 2>&1; then
+    break
+  fi
+  sleep 2
+done
+
+if ! docker exec findaspring-postgis-test psql -U postgres -d findaspring_test -c 'SELECT 1' >/dev/null 2>&1; then
+  echo "PostGIS became healthy but is not accepting SQL connections."
+  exit 1
+fi
+
 export TEST_DATABASE_URL='postgresql://postgres:postgres@localhost:55432/findaspring_test'
 export AUTH_SECRET='local-integration-secret'
 export BOOTSTRAP_ADMIN_KEY='local-bootstrap-key'

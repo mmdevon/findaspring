@@ -13,7 +13,12 @@
 - [x] Mobile moderation user-reports screen implemented.
 - [x] Realtime meetup chat over WebSocket implemented (API + mobile client).
 - [x] Mobile test framework and first smoke flow implemented.
-- [ ] Staging environment and deployment pipeline.
+- [x] API containerization and readiness checks implemented.
+- [x] Migration automation wired into deploy workflow.
+- [x] CI/CD deploy workflow for staging + production added.
+- [x] Release and rollback runbook documented.
+- [ ] Staging infrastructure secrets/host provisioning completed.
+- [ ] First successful staging deployment executed.
 - [ ] Production hardening and release operations.
 
 ## Phase 1: Product Hardening (Weeks 1-2)
@@ -56,4 +61,4 @@
 2. [x] Add websocket chat backend + mobile client switch.
 3. [x] Add mobile test framework and first smoke flow.
 4. [ ] Stand up staging API + PostGIS and run first staging deploy.
-5. [ ] Document release/rollback runbook in repo docs.
+5. [x] Document release/rollback runbook in repo docs.

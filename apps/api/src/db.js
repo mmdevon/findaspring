@@ -32,6 +32,11 @@ const pool = hasDb ? new Pool({ connectionString: config.databaseUrl }) : null;
 
 export const db = {
   hasDb,
+  async isReady() {
+    if (!pool) return false;
+    await pool.query('SELECT 1');
+    return true;
+  },
   async query(text, params = []) {
     if (!pool) throw new Error('DATABASE_NOT_CONFIGURED');
     return pool.query(text, params);

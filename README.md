@@ -48,6 +48,7 @@ If `DATABASE_URL` is missing:
 ## Current API routes
 Public:
 - `GET /health`
+- `GET /ready` (returns `200` only when DB is reachable)
 - `GET /v1/springs?lat=&lng=&radius_km=&q=&page=&page_size=`
 - `GET /v1/springs/:id`
 - `GET /v1/meetups?spring_id=&from=`
@@ -177,6 +178,22 @@ Enable branch protection for `main` in GitHub:
 - Settings -> Branches -> Add rule.
 - Require status checks to pass before merging.
 - Select checks from this workflow: `Lint`, `Typecheck`, `Mobile Tests`, `Unit Tests`, `API Smoke Test`, `Integration Tests (PostGIS)`.
+
+## Deployment
+- Deploy workflow: `.github/workflows/deploy.yml`
+- API image: `ghcr.io/<repo-owner>/findaspring-api`
+- Auto staging deploy:
+  - runs on push to `main` for API/DB/deploy changes
+  - builds image, runs DB migration, restarts API, validates `/ready`
+- Production deploy:
+  - manual workflow dispatch (`target=production`)
+  - supports optional `image_tag` for controlled promotion/rollback
+- Required secrets and host setup:
+  - see `/docs/DEPLOYMENT.md`
+
+## Release Operations
+- Release and rollback runbook:
+  - `/docs/RELEASE_RUNBOOK.md`
 
 ## Notes
 - Mobile theme is wired to shared tokens from `packages/design-tokens`.

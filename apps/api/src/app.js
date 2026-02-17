@@ -1,4 +1,5 @@
 import { parseUrl, json } from './lib/http.js';
+import { db } from './db.js';
 import {
   handleCreateMeetup,
   handleCreateMeetupMessage,
@@ -42,6 +43,12 @@ export const app = async (req, res) => {
 
     if (req.method === 'GET' && url.pathname === '/health') {
       return json(res, 200, { ok: true, service: 'find-a-spring-api' });
+    }
+
+    if (req.method === 'GET' && url.pathname === '/ready') {
+      const ready = await db.isReady();
+      if (ready) return json(res, 200, { ok: true, service: 'find-a-spring-api', database: 'ready' });
+      return json(res, 503, { ok: false, service: 'find-a-spring-api', database: 'not-ready' });
     }
 
     if (req.method === 'GET' && url.pathname === '/v1/springs') {

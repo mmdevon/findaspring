@@ -10,6 +10,7 @@
     "lint": "eslint \"src/**/*.js\" \"test/**/*.js\" \"scripts/**/*.js\"",
     "typecheck": "find src test scripts -name '*.js' -exec node --check {} +",
     "seed:moderator": "node scripts/seed_moderator.js",
+    "db:migrate": "node scripts/migrate.js",
     "test": "node --test",
     "test:unit": "node --test src/lib/passwords.test.js src/lib/tokens.test.js",
     "test:integration": "node --test test/meetups.integration.test.js",
