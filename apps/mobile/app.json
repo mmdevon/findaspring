@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Find A Spring",
+    "slug": "find-a-spring",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android", "web"],
+    "assetBundlePatterns": ["**/*"]
+  }
+}

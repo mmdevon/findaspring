@@ -1,0 +1,46 @@
+screens:
+  - id: auth_login
+    area: auth
+    required_states: [default, loading, error]
+    primary_actions: [login, forgot_password]
+
+  - id: discover_map
+    area: discovery
+    required_states: [default, loading, empty, error, offline, location_permission_denied]
+    primary_actions: [search, use_my_location, open_spring]
+
+  - id: spring_detail
+    area: discovery
+    required_states: [default, loading, error]
+    primary_actions: [open_directions, save_spring, report_issue]
+    required_modules: [coordinates, access_notes, photos, disclaimer]
+
+  - id: submit_spring_form
+    area: contribution
+    required_states: [default, uploading, error, success]
+    primary_actions: [pin_location, upload_photo, submit]
+
+  - id: report_issue_form
+    area: contribution
+    required_states: [default, loading, error, success]
+    primary_actions: [select_reason, submit]
+
+  - id: saved_list
+    area: saved
+    required_states: [default, empty, error]
+    primary_actions: [open_spring, remove_saved]
+
+  - id: meetups_list
+    area: community
+    required_states: [default, loading, empty, error]
+    primary_actions: [open_meetup, filter]
+
+  - id: meetup_detail
+    area: community
+    required_states: [default, loading, full_capacity, cancelled, error]
+    primary_actions: [rsvp_going, rsvp_maybe, join_waitlist, open_chat]
+
+  - id: meetup_chat
+    area: community
+    required_states: [default, reconnecting, send_failed, blocked, error]
+    primary_actions: [send_message, report_user, block_user]
