@@ -108,6 +108,27 @@ jobs:
       - name: Run API unit tests
         run: npm --workspace @findaspring/api run test:unit
 
+  api-smoke:
+    name: API Smoke Test
+    runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.api == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run API smoke test
+        run: npm --workspace @findaspring/api run test:smoke
+
   integration-tests:
     name: Integration Tests (PostGIS)
     runs-on: ubuntu-latest

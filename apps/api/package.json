@@ -7,12 +7,13 @@
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
     "build": "echo 'No build step yet'",
-    "lint": "echo 'No lint step yet'",
-    "typecheck": "echo 'No typecheck step yet'",
+    "lint": "eslint \"src/**/*.js\" \"test/**/*.js\" \"scripts/**/*.js\"",
+    "typecheck": "find src test scripts -name '*.js' -exec node --check {} +",
     "seed:moderator": "node scripts/seed_moderator.js",
     "test": "node --test",
     "test:unit": "node --test src/lib/passwords.test.js src/lib/tokens.test.js",
-    "test:integration": "node --test test/meetups.integration.test.js"
+    "test:integration": "node --test test/meetups.integration.test.js",
+    "test:smoke": "node scripts/smoke_test.js"
   },
   "dependencies": {
     "pg": "^8.13.1"

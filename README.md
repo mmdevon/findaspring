@@ -132,6 +132,7 @@ psql "$DATABASE_URL" -f db/schema.sql
   - `Lint`: runs `npm run lint`
   - `Typecheck`: runs `npm run typecheck`
   - `Unit Tests`: runs `npm --workspace @findaspring/api run test:unit`
+  - `API Smoke Test`: runs `npm --workspace @findaspring/api run test:smoke`
   - `Integration Tests (PostGIS)`: starts `postgis/postgis:16-3.4`, injects `TEST_DATABASE_URL`, and runs `npm --workspace @findaspring/api run test:integration`
 - Path filters:
   - API/DB/workflow changes trigger API unit + integration jobs.
@@ -147,6 +148,34 @@ psql "$DATABASE_URL" -f db/schema.sql
   - Confirm `CREATE EXTENSION IF NOT EXISTS postgis;` can run and that the database user has extension privileges.
 - DB connection failures in CI:
   - Confirm `TEST_DATABASE_URL` points to `localhost:5432` with the same DB/user/password configured in the workflow service.
+
+## Local PostGIS Integration Test
+Run the meetup integration test locally against PostGIS with one command:
+
+```bash
+./scripts/run_integration_with_postgis.sh
+```
+
+Requirements:
+- Docker Desktop installed and running.
+- Port `5432` available on your machine.
+
+Manual alternative:
+
+```bash
+docker compose -f db/docker-compose.postgis.yml up -d
+export TEST_DATABASE_URL='postgresql://postgres:postgres@localhost:5432/findaspring_test'
+export AUTH_SECRET='local-integration-secret'
+export BOOTSTRAP_ADMIN_KEY='local-bootstrap-key'
+npm --workspace @findaspring/api run test:integration
+docker compose -f db/docker-compose.postgis.yml down -v
+```
+
+## Branch Protection
+Enable branch protection for `main` in GitHub:
+- Settings -> Branches -> Add rule.
+- Require status checks to pass before merging.
+- Select checks from this workflow: `Lint`, `Typecheck`, `Unit Tests`, `API Smoke Test`, `Integration Tests (PostGIS)`.
 
 ## Notes
 - Mobile theme is wired to shared tokens from `packages/design-tokens`.
