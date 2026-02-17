@@ -1,0 +1,48 @@
+# Build, Test, and Deploy Plan
+
+## Assumptions
+1. Stack remains React Native (Expo) mobile + Node API + Postgres/PostGIS.
+2. CI baseline in `.github/workflows/ci.yml` remains active.
+3. `main` stays branch-protected and PR-based.
+
+## Phase 1: Product Hardening (Weeks 1-2)
+1. Finalize API contracts for auth, springs, meetups, moderation.
+2. Add mobile navigation architecture (tabs + stacks) and route guards.
+3. Implement moderation UI for user reports.
+4. Replace chat polling with websocket realtime on API and mobile.
+5. Harden auth/session configuration for production (token TTLs, secret handling).
+
+## Phase 2: Testing Expansion (Weeks 2-4)
+1. Expand API unit tests to route and service layers.
+2. Add API integration suites for auth, springs, moderation, and failure paths.
+3. Add mobile component tests (React Native Testing Library) for core screens.
+4. Add mobile E2E smoke tests (Detox or Maestro) for signup/login/discover/meetups.
+5. Add contract tests between mobile client and API responses.
+6. Add load tests for key endpoints (`/v1/springs`, `/v1/meetups`, auth).
+
+## Phase 3: Deployment Foundation (Weeks 3-5)
+1. Add API containerization (`Dockerfile`) and readiness/health probes.
+2. Provision `staging` and `production` environments (API + PostGIS + secrets).
+3. Add migration workflow to run schema changes before rollout.
+4. Add CD pipeline: auto-deploy to staging on merge, manual promotion to prod.
+5. Add mobile release pipeline with Expo EAS profiles (preview/staging/prod).
+
+## Phase 4: Release Operations (Weeks 5-6)
+1. Add observability (structured logs, error tracking, uptime checks, alerts).
+2. Create runbooks for incidents, rollback, DB restore, and secret rotation.
+3. Verify backup/restore for Postgres/PostGIS.
+4. Add release checklist and changelog process.
+
+## Quality Gates (Pre-Production)
+1. CI green on lint, typecheck, unit, smoke, and integration.
+2. API integration suite passes against real PostGIS in CI.
+3. Mobile E2E smoke tests pass on at least one iOS and one Android target.
+4. Staging soak period of 48-72 hours with no critical errors.
+5. Rollback path tested for API and DB migration.
+
+## Immediate Next 7 Days
+1. Implement navigation refactor and moderation UI.
+2. Add websocket chat backend + mobile client switch.
+3. Add mobile test framework and first E2E smoke flow.
+4. Stand up staging API + PostGIS and run first staging deploy.
+5. Document release/rollback runbook in repo docs.

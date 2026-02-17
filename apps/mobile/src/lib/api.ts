@@ -69,6 +69,18 @@ export type MeetupMessage = {
   created_at: string;
 };
 
+export type ModerationUserReport = {
+  id: string;
+  reporter_user_id: string;
+  target_user_id: string;
+  target_message_id?: string | null;
+  reason: string;
+  details?: string | null;
+  status: 'open' | 'triaged' | 'resolved' | 'dismissed';
+  created_at: string;
+  resolved_at?: string | null;
+};
+
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://localhost:4000';
 const STORAGE_KEY = 'findaspring.auth.session';
 
@@ -303,4 +315,16 @@ export const blockUser = async (targetUserId: string) => {
 export const reportUser = async (targetUserId: string, payload: { reason: string; details?: string; target_message_id?: string }) => {
   if (!accessToken) throw new Error('Sign in to report users.');
   await request(`/v1/users/${targetUserId}/report`, { method: 'POST', body: JSON.stringify(payload) }, true);
+};
+
+export const listModerationUserReports = async (status: 'open' | 'triaged' | 'resolved' | 'dismissed' = 'open') => {
+  if (!accessToken) throw new Error('Sign in as moderator/admin.');
+  const payload = await request(`/v1/moderation/user-reports?status=${encodeURIComponent(status)}`, undefined, true);
+  return (payload?.data || []) as ModerationUserReport[];
+};
+
+export const resolveModerationUserReport = async (reportId: string, action: 'resolve' | 'dismiss') => {
+  if (!accessToken) throw new Error('Sign in as moderator/admin.');
+  const payload = await request(`/v1/moderation/user-reports/${reportId}/${action}`, { method: 'POST' }, true);
+  return payload?.data as { id: string; status: 'resolved' | 'dismissed' };
 };

@@ -6,9 +6,10 @@ import { theme } from '../theme/theme';
 
 type SpringDetailScreenProps = {
   springId: string | null;
+  onBack?: () => void;
 };
 
-export function SpringDetailScreen({ springId }: SpringDetailScreenProps) {
+export function SpringDetailScreen({ springId, onBack }: SpringDetailScreenProps) {
   const [spring, setSpring] = useState<SpringDetail | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,6 +88,11 @@ export function SpringDetailScreen({ springId }: SpringDetailScreenProps) {
 
   return (
     <View style={styles.container}>
+      {onBack ? (
+        <Pressable style={styles.backBtn} onPress={onBack}>
+          <Text style={styles.backText}>Back to Discover</Text>
+        </Pressable>
+      ) : null}
       <Text style={styles.title}>{spring.name}</Text>
       <Text style={styles.meta}>
         {[spring.city, spring.region, spring.country].filter(Boolean).join(', ')} | {spring.latitude}, {spring.longitude}
@@ -131,6 +137,19 @@ const styles = StyleSheet.create({
     fontSize: theme.type.h1.size,
     lineHeight: theme.type.h1.lineHeight,
     fontWeight: '700'
+  },
+  backBtn: {
+    alignSelf: 'flex-start',
+    borderWidth: 1,
+    borderColor: theme.color.border.default,
+    borderRadius: theme.radius['12'],
+    paddingHorizontal: theme.space['12'],
+    paddingVertical: theme.space['8'],
+    backgroundColor: '#FFFFFF'
+  },
+  backText: {
+    color: theme.color.text.secondary,
+    fontWeight: '600'
   },
   meta: {
     color: theme.color.text.secondary,

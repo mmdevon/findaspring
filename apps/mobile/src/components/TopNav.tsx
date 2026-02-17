@@ -2,21 +2,27 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { theme } from '../theme/theme';
 
-export type Tab = 'discover' | 'spring' | 'meetups' | 'account';
+export type Tab = 'discover' | 'meetups' | 'account' | 'moderation';
+
+export type TopNavTab = {
+  id: Tab;
+  label: string;
+};
 
 type TopNavProps = {
   activeTab: Tab;
   onChange: (tab: Tab) => void;
+  tabs?: TopNavTab[];
 };
 
-const tabs: Array<{ id: Tab; label: string }> = [
+const defaultTabs: TopNavTab[] = [
   { id: 'discover', label: 'Discover' },
-  { id: 'spring', label: 'Spring Detail' },
   { id: 'meetups', label: 'Meetups' },
-  { id: 'account', label: 'Account' }
+  { id: 'account', label: 'Account' },
+  { id: 'moderation', label: 'Moderation' }
 ];
 
-export function TopNav({ activeTab, onChange }: TopNavProps) {
+export function TopNav({ activeTab, onChange, tabs = defaultTabs }: TopNavProps) {
   return (
     <View style={styles.container}>
       {tabs.map((tab) => {
