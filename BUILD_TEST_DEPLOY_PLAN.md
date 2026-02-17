@@ -25,6 +25,7 @@
 - [x] API integration suites expanded for auth/springs/moderation and failure paths.
 - [x] Mobile component tests expanded for Discover and Meetups core flows.
 - [x] Baseline API load-test harness added for key endpoints.
+- [x] Mobile/API contract integration test coverage added.
 - [ ] Staging infrastructure secrets/host provisioning completed.
 - [ ] First successful staging deployment executed.
 - [ ] Backup/restore verification executed on staging/prod data.
@@ -77,3 +78,4 @@
 9. [x] Expand API integration coverage beyond meetups flow.
 10. [x] Add mobile screen smoke tests for Discover + Meetups.
 11. [x] Add baseline API load-test script for key endpoints.
+12. [x] Add API contract integration tests aligned to mobile response usage.

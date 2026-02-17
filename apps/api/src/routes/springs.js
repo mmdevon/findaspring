@@ -5,6 +5,8 @@ import { requireUser } from '../lib/auth.js';
 import { json, parseBody } from '../lib/http.js';
 
 const asNumber = (value, fallback) => {
+  if (value === null || value === undefined) return fallback;
+  if (typeof value === 'string' && value.trim() === '') return fallback;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
 };
